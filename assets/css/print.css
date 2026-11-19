@@ -1,0 +1,48 @@
+/* Estilos exclusivos para imprimir / guardar en PDF */
+@page { size: A4; margin: 0; }
+
+html, body {
+  background: #fff !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.topbar, .panel-left, .preview-toolbar { display: none !important; }
+
+.workspace { display: block !important; height: auto !important; }
+.panel-right { display: block !important; background: #fff !important; }
+.preview-scroll { display: block !important; overflow: visible !important; padding: 0 !important; }
+
+.cv {
+  width: 210mm !important;
+  min-height: 297mm !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.cv-section, .cv-item, .form-block, .item-card { break-inside: avoid; page-break-inside: avoid; }
+.cv-section-title { break-after: avoid; page-break-after: avoid; }
+
+/* Evita hojas en blanco por el min-height cuando el contenido es corto */
+.cv { overflow: visible; }
+
+/* --- Solicitud de empleo: solo se imprime la vista previa --- */
+.preview-empty { display: none !important; }
+#preview-root { display: block !important; }
+
+.sol-page {
+  box-shadow: none !important;
+  margin: 0 !important;
+  width: 210mm !important;
+  min-height: 297mm !important;
+  break-after: page;
+  page-break-after: always;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.sol-page:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}

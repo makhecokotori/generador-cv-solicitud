@@ -1,0 +1,435 @@
+{
+  "version": "1.0",
+  "idioma": "es",
+  "descripcion": "Definicion modular de bloques para el constructor de CV. La app lee este archivo para generar checkboxes, campos, vista previa y reglas.",
+  "categorias": {
+    "esencial": "Siempre incluido, no se puede desactivar",
+    "esencial_cond": "Obligatorio salvo que el perfil lo justifique",
+    "recomendado": "Aporta valor en la mayoria de los casos",
+    "opcional": "Solo si aplica al perfil",
+    "avanzado": "Perfiles especificos (academia, investigacion)"
+  },
+  "bloques": [
+    {
+      "id": "cabecera",
+      "nombre": "Datos personales y contacto",
+      "categoria": "esencial",
+      "fijo": true,
+      "por_defecto": true,
+      "orden": 1,
+      "tipo": "simple",
+      "descripcion": "Nombre, titulo y datos de contacto. Encabezado del CV.",
+      "cuando_usar": "Siempre. No se puede desactivar.",
+      "campos": [
+        { "clave": "nombre", "etiqueta": "Nombre completo", "tipo": "texto", "requerido": true, "placeholder": "Ana Torres" },
+        { "clave": "titulo_profesional", "etiqueta": "Titulo profesional", "tipo": "texto", "requerido": false, "placeholder": "Disenadora UX" },
+        { "clave": "telefono", "etiqueta": "Telefono", "tipo": "texto", "requerido": true, "placeholder": "+34 600 000 000" },
+        { "clave": "email", "etiqueta": "Correo electronico", "tipo": "email", "requerido": true, "placeholder": "ana@email.com" },
+        { "clave": "ciudad_pais", "etiqueta": "Ciudad y pais", "tipo": "texto", "requerido": false, "placeholder": "Madrid, Espana" },
+        { "clave": "linkedin", "etiqueta": "LinkedIn", "tipo": "url", "requerido": false, "placeholder": "https://linkedin.com/in/..." },
+        { "clave": "github_portafolio", "etiqueta": "GitHub / Portafolio", "tipo": "url", "requerido": false, "placeholder": "https://..." },
+        { "clave": "sitio_web", "etiqueta": "Sitio web", "tipo": "url", "requerido": false, "placeholder": "https://..." },
+        { "clave": "foto", "etiqueta": "Foto (opcional)", "tipo": "archivo", "requerido": false, "placeholder": "" }
+      ],
+      "notas": "La foto va desactivada por defecto por motivos de privacidad/anti-discriminacion."
+    },
+    {
+      "id": "resumen",
+      "nombre": "Resumen profesional / Perfil",
+      "categoria": "recomendado",
+      "fijo": false,
+      "por_defecto": true,
+      "orden": 2,
+      "tipo": "simple",
+      "descripcion": "3-4 lineas sobre quien eres, anos de experiencia, especialidad y valor aportado.",
+      "cuando_usar": "Casi siempre. Alternativa moderna al objetivo.",
+      "campos": [
+        { "clave": "texto", "etiqueta": "Resumen profesional", "tipo": "textarea", "requerido": true, "placeholder": "Profesional con 5 anos de experiencia en..." },
+        { "clave": "palabras_clave", "etiqueta": "Palabras clave (ATS)", "tipo": "texto", "requerido": false, "placeholder": "UX, Figma, investigacion de usuarios" }
+      ],
+      "notas": "Mutuamente excluyente con 'objetivo'."
+    },
+    {
+      "id": "objetivo",
+      "nombre": "Objetivo profesional",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 3,
+      "tipo": "simple",
+      "descripcion": "Enunciado breve sobre el puesto que se busca.",
+      "cuando_usar": "Formularios publicos o mercados donde aun se solicita.",
+      "campos": [
+        { "clave": "texto", "etiqueta": "Objetivo profesional", "tipo": "textarea", "requerido": true, "placeholder": "Busco incorporarme a un equipo de..." }
+      ],
+      "notas": "Mutuamente excluyente con 'resumen'."
+    },
+    {
+      "id": "experiencia",
+      "nombre": "Experiencia laboral",
+      "categoria": "esencial_cond",
+      "fijo": false,
+      "por_defecto": true,
+      "orden": 4,
+      "tipo": "lista",
+      "descripcion": "Puestos desempenados con logros y responsabilidades.",
+      "cuando_usar": "Si se ha trabajado (incluye practicas y freelance).",
+      "item_campos": [
+        { "clave": "puesto", "etiqueta": "Puesto", "tipo": "texto", "requerido": true, "placeholder": "Disenador UX" },
+        { "clave": "empresa", "etiqueta": "Empresa", "tipo": "texto", "requerido": true, "placeholder": "Acme S.L." },
+        { "clave": "ubicacion", "etiqueta": "Ubicacion", "tipo": "texto", "requerido": false, "placeholder": "Madrid" },
+        { "clave": "fecha_inicio", "etiqueta": "Fecha de inicio", "tipo": "mes", "requerido": true, "placeholder": "" },
+        { "clave": "actual", "etiqueta": "Trabajo actualmente aqui", "tipo": "booleano", "requerido": false, "placeholder": "" },
+        { "clave": "fecha_fin", "etiqueta": "Fecha de fin", "tipo": "mes", "requerido": false, "placeholder": "" },
+        { "clave": "logros", "etiqueta": "Logros y responsabilidades (una por linea)", "tipo": "textarea", "requerido": false, "placeholder": "Lideré el rediseño...\nReduje el tiempo de carga..." },
+        { "clave": "tecnologias", "etiqueta": "Tecnologias / herramientas", "tipo": "texto", "requerido": false, "placeholder": "Figma, HTML, CSS" }
+      ],
+      "notas": "Orden cronologico inverso. 3-5 viñetas por puesto."
+    },
+    {
+      "id": "proyectos",
+      "nombre": "Proyectos destacados / Portafolio",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 5,
+      "tipo": "lista",
+      "descripcion": "Proyectos propios, academicos o freelance con enlaces.",
+      "cuando_usar": "Perfiles tecnicos, creativos o juniors sin experiencia formal.",
+      "item_campos": [
+        { "clave": "nombre", "etiqueta": "Nombre del proyecto", "tipo": "texto", "requerido": true, "placeholder": "App de gestion de tareas" },
+        { "clave": "descripcion", "etiqueta": "Descripcion", "tipo": "textarea", "requerido": false, "placeholder": "Que problema resuelve..." },
+        { "clave": "rol", "etiqueta": "Rol", "tipo": "texto", "requerido": false, "placeholder": "Desarrollador frontend" },
+        { "clave": "tecnologias", "etiqueta": "Tecnologias", "tipo": "texto", "requerido": false, "placeholder": "React, Node.js" },
+        { "clave": "enlace", "etiqueta": "Enlace (GitHub, demo, Behance)", "tipo": "url", "requerido": false, "placeholder": "https://..." },
+        { "clave": "periodo", "etiqueta": "Periodo", "tipo": "texto", "requerido": false, "placeholder": "Ene 2024 - Mar 2024" },
+        { "clave": "resultado", "etiqueta": "Resultado medible", "tipo": "texto", "requerido": false, "placeholder": "500 usuarios activos" }
+      ],
+      "notas": "Puede sustituir a 'experiencia' en perfiles junior."
+    },
+    {
+      "id": "educacion",
+      "nombre": "Educacion",
+      "categoria": "esencial_cond",
+      "fijo": false,
+      "por_defecto": true,
+      "orden": 6,
+      "tipo": "lista",
+      "descripcion": "Formacion academica y cursos relevantes.",
+      "cuando_usar": "Imprescindible para estudiantes y primer empleo.",
+      "item_campos": [
+        { "clave": "titulo", "etiqueta": "Titulo o carrera", "tipo": "texto", "requerido": true, "placeholder": "Grado en Diseno" },
+        { "clave": "institucion", "etiqueta": "Institucion", "tipo": "texto", "requerido": true, "placeholder": "Universidad Complutense" },
+        { "clave": "ubicacion", "etiqueta": "Ubicacion", "tipo": "texto", "requerido": false, "placeholder": "Madrid" },
+        { "clave": "fecha_inicio", "etiqueta": "Fecha de inicio", "tipo": "mes", "requerido": false, "placeholder": "" },
+        { "clave": "fecha_fin", "etiqueta": "Fecha de fin", "tipo": "mes", "requerido": false, "placeholder": "" },
+        { "clave": "estado", "etiqueta": "Estado", "tipo": "opciones", "opciones": ["Graduado", "En curso", "Incompleto"], "requerido": false, "placeholder": "" },
+        { "clave": "promedio_honores", "etiqueta": "Promedio u honores", "tipo": "texto", "requerido": false, "placeholder": "Matricula de Honor" },
+        { "clave": "cursos", "etiqueta": "Cursos relevantes", "tipo": "texto", "requerido": false, "placeholder": "Investigacion de usuarios, Prototipado" }
+      ],
+      "notas": "En perfiles senior, reducir a 2-3 lineas."
+    },
+    {
+      "id": "habilidades",
+      "nombre": "Habilidades y competencias",
+      "categoria": "recomendado",
+      "fijo": false,
+      "por_defecto": true,
+      "orden": 7,
+      "tipo": "tags",
+      "descripcion": "Habilidades tecnicas, blandas, herramientas y stack.",
+      "cuando_usar": "Casi siempre.",
+      "grupos": [
+        { "clave": "tecnicas", "etiqueta": "Tecnicas / duras" },
+        { "clave": "blandas", "etiqueta": "Blandas" },
+        { "clave": "herramientas", "etiqueta": "Herramientas" },
+        { "clave": "stack", "etiqueta": "Stack tecnologico" }
+      ],
+      "campos": [
+        { "clave": "habilidades", "etiqueta": "Habilidades (separadas por coma)", "tipo": "tags", "requerido": true, "placeholder": "JavaScript, Comunicacion, Figma" }
+      ],
+      "notas": "Separar por grupos mejora lectura y ATS."
+    },
+    {
+      "id": "idiomas",
+      "nombre": "Idiomas",
+      "categoria": "recomendado",
+      "fijo": false,
+      "por_defecto": true,
+      "orden": 8,
+      "tipo": "lista",
+      "descripcion": "Idiomas y nivel de dominio.",
+      "cuando_usar": "Si el puesto lo requiere o el candidato es bilingue.",
+      "item_campos": [
+        { "clave": "idioma", "etiqueta": "Idioma", "tipo": "texto", "requerido": true, "placeholder": "Ingles" },
+        { "clave": "nivel", "etiqueta": "Nivel", "tipo": "opciones", "opciones": ["Nativo", "C2", "C1", "B2", "B1", "A2", "A1"], "requerido": true, "placeholder": "" },
+        { "clave": "certificacion", "etiqueta": "Certificacion", "tipo": "texto", "requerido": false, "placeholder": "IELTS 7.5" }
+      ],
+      "notas": "Usar escala MCER para evitar ambiguedad."
+    },
+    {
+      "id": "certificaciones",
+      "nombre": "Certificaciones y cursos",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 9,
+      "tipo": "lista",
+      "descripcion": "Certificados vigentes y relevantes.",
+      "cuando_usar": "Tecnologia, marketing, salud y oficios regulados.",
+      "item_campos": [
+        { "clave": "nombre", "etiqueta": "Nombre de la certificacion", "tipo": "texto", "requerido": true, "placeholder": "AWS Certified Cloud Practitioner" },
+        { "clave": "entidad", "etiqueta": "Entidad emisora", "tipo": "texto", "requerido": false, "placeholder": "Amazon" },
+        { "clave": "fecha", "etiqueta": "Fecha de obtencion", "tipo": "mes", "requerido": false, "placeholder": "" },
+        { "clave": "credencial_url", "etiqueta": "URL de credencial", "tipo": "url", "requerido": false, "placeholder": "https://..." },
+        { "clave": "vigencia", "etiqueta": "Vigencia", "tipo": "texto", "requerido": false, "placeholder": "Hasta 2027" }
+      ],
+      "notas": "Priorizar certificaciones vigentes."
+    },
+    {
+      "id": "logros",
+      "nombre": "Logros profesionales",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 10,
+      "tipo": "lista",
+      "descripcion": "Resultados destacables con metricas.",
+      "cuando_usar": "Cuando los logres pesen mas que las responsabilidades.",
+      "item_campos": [
+        { "clave": "titulo", "etiqueta": "Titulo del logro", "tipo": "texto", "requerido": true, "placeholder": "Incremento de conversion" },
+        { "clave": "descripcion", "etiqueta": "Descripcion", "tipo": "textarea", "requerido": false, "placeholder": "Que se hizo y como..." },
+        { "clave": "fecha", "etiqueta": "Fecha o periodo", "tipo": "texto", "requerido": false, "placeholder": "2024" },
+        { "clave": "metrica", "etiqueta": "Metrica", "tipo": "texto", "requerido": false, "placeholder": "+35% de conversion" }
+      ],
+      "notas": "No duplicar lo ya incluido en 'experiencia'."
+    },
+    {
+      "id": "reconocimientos",
+      "nombre": "Premios, becas y honores",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 11,
+      "tipo": "lista",
+      "descripcion": "Premios, becas, menciones honorificas y reconocimientos internos.",
+      "cuando_usar": "Perfiles academicos, creativos y de investigacion.",
+      "item_campos": [
+        { "clave": "nombre", "etiqueta": "Nombre", "tipo": "texto", "requerido": true, "placeholder": "Beca de investigacion" },
+        { "clave": "entidad", "etiqueta": "Entidad", "tipo": "texto", "requerido": false, "placeholder": "Universidad" },
+        { "clave": "fecha", "etiqueta": "Fecha", "tipo": "texto", "requerido": false, "placeholder": "2023" },
+        { "clave": "motivo", "etiqueta": "Motivo", "tipo": "texto", "requerido": false, "placeholder": "Mejor proyecto de fin de grado" }
+      ],
+      "notas": ""
+    },
+    {
+      "id": "publicaciones",
+      "nombre": "Publicaciones e investigacion",
+      "categoria": "avanzado",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 12,
+      "tipo": "lista",
+      "descripcion": "Articulos, libros y ponencias.",
+      "cuando_usar": "Perfiles academicos y cientificos.",
+      "item_campos": [
+        { "clave": "titulo", "etiqueta": "Titulo", "tipo": "texto", "requerido": true, "placeholder": "Titulo del articulo" },
+        { "clave": "autores", "etiqueta": "Autores", "tipo": "texto", "requerido": false, "placeholder": "A. Torres, B. Lopez" },
+        { "clave": "revista", "etiqueta": "Revista / editorial", "tipo": "texto", "requerido": false, "placeholder": "Journal of UX" },
+        { "clave": "anio", "etiqueta": "Anio", "tipo": "texto", "requerido": false, "placeholder": "2024" },
+        { "clave": "tipo_publicacion", "etiqueta": "Tipo", "tipo": "opciones", "opciones": ["Articulo", "Libro", "Ponencia", "Tesis"], "requerido": false, "placeholder": "" },
+        { "clave": "enlace", "etiqueta": "DOI o enlace", "tipo": "url", "requerido": false, "placeholder": "https://..." }
+      ],
+      "notas": "Solo si es relevante al puesto."
+    },
+    {
+      "id": "voluntariado",
+      "nombre": "Voluntariado",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 13,
+      "tipo": "lista",
+      "descripcion": "Colaboraciones con organizaciones sin animo de lucro.",
+      "cuando_usar": "Juniors o perfiles con poca experiencia laboral.",
+      "item_campos": [
+        { "clave": "organizacion", "etiqueta": "Organizacion", "tipo": "texto", "requerido": true, "placeholder": "Cruz Roja" },
+        { "clave": "rol", "etiqueta": "Rol", "tipo": "texto", "requerido": false, "placeholder": "Voluntario de logistica" },
+        { "clave": "periodo", "etiqueta": "Periodo", "tipo": "texto", "requerido": false, "placeholder": "2022 - 2023" },
+        { "clave": "descripcion", "etiqueta": "Descripcion", "tipo": "textarea", "requerido": false, "placeholder": "Que hiciste..." },
+        { "clave": "causa", "etiqueta": "Causa", "tipo": "texto", "requerido": false, "placeholder": "Educacion, medio ambiente" }
+      ],
+      "notas": ""
+    },
+    {
+      "id": "licencias",
+      "nombre": "Licencias y permisos",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 14,
+      "tipo": "lista",
+      "descripcion": "Licencias de conducir, permisos profesionales y certificados de seguridad.",
+      "cuando_usar": "Choferes, tecnicos, salud, seguridad, aviacion.",
+      "item_campos": [
+        { "clave": "tipo", "etiqueta": "Tipo de licencia", "tipo": "texto", "requerido": true, "placeholder": "Carnet de conducir B" },
+        { "clave": "numero", "etiqueta": "Numero", "tipo": "texto", "requerido": false, "placeholder": "" },
+        { "clave": "entidad", "etiqueta": "Entidad emisora", "tipo": "texto", "requerido": false, "placeholder": "DGT" },
+        { "clave": "emision", "etiqueta": "Fecha de emision", "tipo": "mes", "requerido": false, "placeholder": "" },
+        { "clave": "vigencia", "etiqueta": "Vigencia", "tipo": "texto", "requerido": false, "placeholder": "Hasta 2030" }
+      ],
+      "notas": "Omitir si no se exige para el puesto."
+    },
+    {
+      "id": "servicios",
+      "nombre": "Servicios / Especialidades",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 15,
+      "tipo": "simple",
+      "descripcion": "Servicios ofrecidos y modalidades de trabajo para freelance.",
+      "cuando_usar": "Freelance e independientes.",
+      "campos": [
+        { "clave": "servicios", "etiqueta": "Servicios ofrecidos (uno por linea)", "tipo": "textarea", "requerido": true, "placeholder": "Diseno de identidad visual\nRedes sociales" },
+        { "clave": "nichos", "etiqueta": "Nichos atendidos", "tipo": "texto", "requerido": false, "placeholder": "Startups, hosteleria" },
+        { "clave": "modalidades", "etiqueta": "Modalidades", "tipo": "texto", "requerido": false, "placeholder": "Remoto, presencial, hibrido" }
+      ],
+      "notas": "Complementa o sustituye al resumen en CVs de freelance."
+    },
+    {
+      "id": "testimonios",
+      "nombre": "Testimonios de clientes",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 16,
+      "tipo": "lista",
+      "descripcion": "Frases breves de clientes satisfechos.",
+      "cuando_usar": "Freelance e independientes, con permiso del cliente.",
+      "item_campos": [
+        { "clave": "cliente", "etiqueta": "Nombre del cliente", "tipo": "texto", "requerido": true, "placeholder": "Carlos Ruiz" },
+        { "clave": "cargo_empresa", "etiqueta": "Cargo / empresa", "tipo": "texto", "requerido": false, "placeholder": "CEO, Empresa X" },
+        { "clave": "texto", "etiqueta": "Testimonio", "tipo": "textarea", "requerido": true, "placeholder": "Trabajar con Ana fue..." }
+      ],
+      "notas": "2-3 testimonios breves son suficientes."
+    },
+    {
+      "id": "disponibilidad",
+      "nombre": "Disponibilidad y expectativas",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 17,
+      "tipo": "simple",
+      "descripcion": "Cuando puede empezar, jornada, modalidad y expectativas.",
+      "cuando_usar": "Cuando el proceso de seleccion lo solicite.",
+      "campos": [
+        { "clave": "disponibilidad", "etiqueta": "Disponibilidad", "tipo": "opciones", "opciones": ["Inmediata", "A 15 dias", "A 30 dias", "A convenir"], "requerido": false, "placeholder": "" },
+        { "clave": "jornada", "etiqueta": "Jornada", "tipo": "opciones", "opciones": ["Completa", "Parcial", "Por horas"], "requerido": false, "placeholder": "" },
+        { "clave": "modalidad", "etiqueta": "Modalidad", "tipo": "opciones", "opciones": ["Remoto", "Hibrido", "Presencial"], "requerido": false, "placeholder": "" },
+        { "clave": "expectativa_salarial", "etiqueta": "Expectativa salarial", "tipo": "texto", "requerido": false, "placeholder": "A convenir" },
+        { "clave": "viajar", "etiqueta": "Disposicion a viajar", "tipo": "booleano", "requerido": false, "placeholder": "" }
+      ],
+      "notas": "El salario se omite en algunos paises; dejar configurable."
+    },
+    {
+      "id": "referencias",
+      "nombre": "Referencias",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 18,
+      "tipo": "simple",
+      "descripcion": "Referencias disponibles o listado de contactos.",
+      "cuando_usar": "Si el empleador lo pide explicitamente.",
+      "campos": [
+        { "clave": "modo", "etiqueta": "Formato", "tipo": "opciones", "opciones": ["Disponibles a solicitud", "Listado de referencias"], "requerido": true, "placeholder": "" },
+        { "clave": "nombre", "etiqueta": "Nombre del referente", "tipo": "texto", "requerido": false, "placeholder": "Jefe anterior" },
+        { "clave": "cargo", "etiqueta": "Cargo", "tipo": "texto", "requerido": false, "placeholder": "Manager de diseno" },
+        { "clave": "empresa", "etiqueta": "Empresa", "tipo": "texto", "requerido": false, "placeholder": "Acme S.L." },
+        { "clave": "contacto", "etiqueta": "Contacto", "tipo": "texto", "requerido": false, "placeholder": "email o telefono" }
+      ],
+      "notas": "La opcion 'Disponibles a solicitud' ahorra espacio."
+    },
+    {
+      "id": "intereses",
+      "nombre": "Intereses y aficiones",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 19,
+      "tipo": "tags",
+      "descripcion": "Intereses personales o profesionales.",
+      "cuando_usar": "Solo si conecta con el puesto o la empresa.",
+      "campos": [
+        { "clave": "intereses", "etiqueta": "Intereses (separados por coma)", "tipo": "tags", "requerido": false, "placeholder": "Lectura, senderismo, open source" }
+      ],
+      "notas": "Baja prioridad: quita espacio a bloques mas utiles."
+    },
+    {
+      "id": "datos_adicionales",
+      "nombre": "Datos adicionales",
+      "categoria": "opcional",
+      "fijo": false,
+      "por_defecto": false,
+      "orden": 20,
+      "tipo": "simple",
+      "descripcion": "Edad, estado civil, nacionalidad y genero.",
+      "cuando_usar": "Solo si el formulario lo pide explicitamente.",
+      "campos": [
+        { "clave": "fecha_nacimiento", "etiqueta": "Fecha de nacimiento", "tipo": "fecha", "requerido": false, "placeholder": "" },
+        { "clave": "estado_civil", "etiqueta": "Estado civil", "tipo": "texto", "requerido": false, "placeholder": "" },
+        { "clave": "nacionalidad", "etiqueta": "Nacionalidad", "tipo": "texto", "requerido": false, "placeholder": "" },
+        { "clave": "genero", "etiqueta": "Genero", "tipo": "texto", "requerido": false, "placeholder": "" }
+      ],
+      "notas": "Oculto por defecto por privacidad y riesgo de discriminacion."
+    }
+  ],
+  "reglas": [
+    { "id": "cabecera_fija", "tipo": "fijo", "bloque": "cabecera", "mensaje": "El bloque 'cabecera' siempre va incluido y en primer lugar." },
+    { "id": "exclusion_resumen_objetivo", "tipo": "exclusion", "bloques": ["resumen", "objetivo"], "mensaje": "No se pueden usar 'resumen' y 'objetivo' a la vez. Se recomienda 'resumen'." },
+    { "id": "minimo_contenido", "tipo": "al_menos_uno", "bloques": ["experiencia", "proyectos", "educacion"], "mensaje": "Debe incluirse al menos uno de: experiencia, proyectos o educacion." },
+    { "id": "privacidad_datos", "tipo": "advertencia", "bloque": "datos_adicionales", "mensaje": "Incluir datos personales puede generar discriminacion. Usar solo si se solicita." },
+    { "id": "longitud", "tipo": "recomendacion", "mensaje": "1 pagina con menos de 5 anos de experiencia; 2 paginas para perfiles senior o academicos." },
+    { "id": "ats", "tipo": "recomendacion", "mensaje": "Los bloques esenciales usan encabezados estandar y texto simple, sin tablas ni columnas." },
+    { "id": "no_duplicar_logros", "tipo": "recomendacion", "mensaje": "No repetir en 'logros' lo ya escrito en 'experiencia'." }
+  ],
+  "presets": [
+    {
+      "id": "basico",
+      "nombre": "Basico",
+      "bloques": ["cabecera", "resumen", "experiencia", "educacion", "habilidades"]
+    },
+    {
+      "id": "primer_empleo",
+      "nombre": "Primer empleo / Estudiante",
+      "bloques": ["cabecera", "resumen", "educacion", "proyectos", "habilidades", "idiomas", "certificaciones", "voluntariado"]
+    },
+    {
+      "id": "profesional",
+      "nombre": "Profesional con experiencia",
+      "bloques": ["cabecera", "resumen", "experiencia", "educacion", "habilidades", "idiomas", "certificaciones", "logros", "proyectos"]
+    },
+    {
+      "id": "tecnico",
+      "nombre": "Tecnico / TI",
+      "bloques": ["cabecera", "resumen", "experiencia", "proyectos", "habilidades", "educacion", "certificaciones", "idiomas", "logros"]
+    },
+    {
+      "id": "freelance",
+      "nombre": "Freelance / Independiente",
+      "bloques": ["cabecera", "resumen", "servicios", "experiencia", "proyectos", "testimonios", "habilidades", "certificaciones", "idiomas"]
+    },
+    {
+      "id": "academico",
+      "nombre": "Academico / Investigacion",
+      "bloques": ["cabecera", "resumen", "educacion", "publicaciones", "experiencia", "proyectos", "reconocimientos", "idiomas", "certificaciones"]
+    }
+  ],
+  "orden_por_defecto": [
+    "cabecera", "resumen", "objetivo", "experiencia", "proyectos", "educacion", "habilidades", "idiomas",
+    "certificaciones", "logros", "reconocimientos", "publicaciones", "voluntariado", "licencias",
+    "servicios", "testimonios", "disponibilidad", "referencias", "intereses", "datos_adicionales"
+  ]
+}

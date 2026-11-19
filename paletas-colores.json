@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "idioma": "es",
+  "descripcion": "Sistema de paletas para los 3 disenos de CV: 2 paletas predefinidas de 3 tonos + 1 modo personalizado por diseno.",
+  "tonos": {
+    "base": {
+      "etiqueta": "Color base",
+      "rol": "Nombre, encabezados, titulos de seccion y, segun el diseno, fondo de cabecera o barra lateral."
+    },
+    "lineas": {
+      "etiqueta": "Color de lineas",
+      "rol": "Divisores, bordes, vinetas y detalles finos."
+    },
+    "decorativo": {
+      "etiqueta": "Color decorativo",
+      "rol": "Fondos suaves de tarjetas, etiquetas, iconos y realces."
+    }
+  },
+  "modos": [
+    { "id": "paleta_1", "etiqueta": "Paleta 1", "descripcion": "Combinacion predefinida principal del diseno." },
+    { "id": "paleta_2", "etiqueta": "Paleta 2", "descripcion": "Combinacion predefinida alternativa del diseno." },
+    { "id": "personalizada", "etiqueta": "Personalizada", "descripcion": "El usuario elige los 3 tonos. Se conserva al cambiar de diseno.", "editable": true }
+  ],
+  "reglas": {
+    "contraste_automatico": {
+      "descripcion": "Todo texto que va sobre un tono usa automaticamente blanco u oscuro, segun cual de los dos tenga mayor contraste.",
+      "formula": "WCAG luminancia relativa: se compara el ratio contra #FFFFFF y contra #111827 y se elige el mayor",
+      "tonos_afectados": ["base", "lineas", "decorativo"],
+      "variables_generadas": ["--texto-base", "--texto-lineas", "--texto-decorativo"],
+      "contraste_minimo": 4.5
+    },
+    "tonos_como_texto": {
+      "descripcion": "Cuando un tono se usa como texto sobre fondo blanco, se oscurece conservando su matiz hasta alcanzar el contraste minimo.",
+      "variables_generadas": ["--base-legible", "--lineas-legible"],
+      "contraste_minimo": 4.5,
+      "mensaje": "Contraste ajustado automaticamente para mantener el texto legible."
+    },
+    "tonos_no_identicos": {
+      "descripcion": "Los 3 tonos no deben ser identicos entre si.",
+      "mensaje": "Los tonos base, lineas y decorativo deben ser diferentes."
+    },
+    "personalizada_persiste": {
+      "descripcion": "El modo personalizado se define una vez y se aplica al diseno activo; los valores se conservan al cambiar de diseno."
+    }
+  },
+  "disenos": [
+    {
+      "id": "clasico",
+      "nombre": "Clasico / ATS",
+      "descripcion": "Sobrio y de alto contraste, compatible con sistemas ATS.",
+      "paletas": {
+        "paleta_1": {
+          "nombre": "Tinta y Acero",
+          "tonos": { "base": "#1F2937", "lineas": "#6B7280", "decorativo": "#D1D5DB" }
+        },
+        "paleta_2": {
+          "nombre": "Azul Corporativo",
+          "tonos": { "base": "#1E3A5F", "lineas": "#3D6C99", "decorativo": "#C9DEEE" }
+        },
+        "personalizada": {
+          "nombre": "Personalizada",
+          "tonos": { "base": "#1F2937", "lineas": "#6B7280", "decorativo": "#D1D5DB" },
+          "editable": true
+        }
+      },
+      "mapeo": {
+        "base": ["nombre", "titulos_seccion", "texto_principal"],
+        "lineas": ["divisores", "bordes", "vinetas"],
+        "decorativo": ["fondos_suaves", "etiquetas"]
+      },
+      "notas": "Mantener el texto principal oscuro para compatibilidad ATS."
+    },
+    {
+      "id": "moderno",
+      "nombre": "Moderno / Lateral",
+      "descripcion": "Columna lateral para contacto y habilidades, cuerpo a la derecha.",
+      "paletas": {
+        "paleta_1": {
+          "nombre": "Verde Profesional",
+          "tonos": { "base": "#1F4E3D", "lineas": "#3E8E6E", "decorativo": "#D7EDE2" }
+        },
+        "paleta_2": {
+          "nombre": "Grafito y Cobre",
+          "tonos": { "base": "#2B2B2B", "lineas": "#B87333", "decorativo": "#E8D9C5" }
+        },
+        "personalizada": {
+          "nombre": "Personalizada",
+          "tonos": { "base": "#1F4E3D", "lineas": "#3E8E6E", "decorativo": "#D7EDE2" },
+          "editable": true
+        }
+      },
+      "mapeo": {
+        "base": ["fondo_barra_lateral", "nombre"],
+        "lineas": ["separadores_laterales", "separadores_cuerpo"],
+        "decorativo": ["etiquetas_habilidades", "iconos"]
+      },
+      "notas": "El texto sobre la barra lateral usa la regla de contraste automatica."
+    },
+    {
+      "id": "creativo",
+      "nombre": "Creativo / Tarjeta",
+      "descripcion": "Cabecera con color y secciones en tarjetas, mas visual.",
+      "paletas": {
+        "paleta_1": {
+          "nombre": "Terracota",
+          "tonos": { "base": "#8C3B2E", "lineas": "#D98E73", "decorativo": "#F4E3D3" }
+        },
+        "paleta_2": {
+          "nombre": "Indigo Electrico",
+          "tonos": { "base": "#3B2E8C", "lineas": "#7A6BD9", "decorativo": "#E4DFF7" }
+        },
+        "personalizada": {
+          "nombre": "Personalizada",
+          "tonos": { "base": "#8C3B2E", "lineas": "#D98E73", "decorativo": "#F4E3D3" },
+          "editable": true
+        }
+      },
+      "mapeo": {
+        "base": ["cabecera", "nombre", "titulos"],
+        "lineas": ["bordes_tarjeta", "divisores"],
+        "decorativo": ["fondo_tarjetas", "pastillas", "iconos"]
+      },
+      "notas": "Aplicar contraste automatico al texto sobre la cabecera."
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constructor de CV</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Ctext x='32' y='41' font-size='26' font-weight='800' text-anchor='middle' fill='white' font-family='Arial'%3ECV%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/cv.css">
+  <link rel="stylesheet" href="../assets/css/print.css" media="print">
+</head>
+<body class="builder">
+  <header class="topbar">
+    <a class="topbar-back" href="../index.html">← Inicio</a>
+    <div class="brand"><div class="brand-mark">CV</div></div>
+    <h1 class="topbar-title">Constructor de CV</h1>
+    <div class="topbar-actions">
+      <button type="button" id="btn-clear" class="btn btn-ghost">Limpiar</button>
+      <button type="button" id="btn-print" class="btn btn-primary">Guardar en PDF</button>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <!-- Panel izquierdo: controles + formulario -->
+    <aside class="panel panel-left" id="panel-left">
+      <div class="panel-section">
+        <h2 class="panel-title">1. Perfil inicial</h2>
+        <div id="presets" class="preset-list"></div>
+      </div>
+
+      <div class="panel-section">
+        <h2 class="panel-title">2. Bloques del CV</h2>
+        <p class="panel-hint">Activa solo lo que aplique. Usa ↑ ↓ para ordenar.</p>
+        <div id="block-list" class="block-list"></div>
+      </div>
+
+      <div class="panel-section">
+        <h2 class="panel-title">3. Diseño</h2>
+        <div id="designs" class="chip-row"></div>
+      </div>
+
+      <div class="panel-section">
+        <h2 class="panel-title">4. Color</h2>
+        <div id="palettes" class="chip-row"></div>
+        <div id="custom-colors" class="custom-colors" hidden>
+          <label>Base <input type="color" id="color-base"></label>
+          <label>Líneas <input type="color" id="color-lineas"></label>
+          <label>Decorativo <input type="color" id="color-decorativo"></label>
+        </div>
+        <div id="color-warning" class="color-warning" hidden></div>
+      </div>
+
+      <div class="panel-section panel-section--form">
+        <h2 class="panel-title">5. Contenido</h2>
+        <div id="form-root" class="form-root"></div>
+      </div>
+    </aside>
+
+    <!-- Panel derecho: vista previa -->
+    <main class="panel panel-right">
+      <div class="preview-toolbar">
+        <span class="preview-label">Vista previa</span>
+        <span class="preview-hint">A4 · impresión activa con Ctrl+P</span>
+      </div>
+      <div class="preview-scroll">
+        <div id="preview" class="cv"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/cv.js"></script>
+</body>
+</html>

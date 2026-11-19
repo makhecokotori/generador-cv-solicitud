@@ -1,0 +1,92 @@
+/* ===================================================================
+   Solicitud de empleo — formato fijo de 2 paginas
+   =================================================================== */
+
+.workspace { grid-template-columns: 600px 1fr; }
+.sol-form-root { display: block; padding: 0 14px 60px; }
+
+.preview-empty {
+  align-self: flex-start; max-width: 520px; margin: 40px auto; padding: 22px;
+  border: 1px dashed var(--ui-border); border-radius: 12px;
+  background: #fff; color: var(--ui-muted); text-align: center;
+}
+.sol-theme-switch { display: flex; gap: 6px; }
+
+/* ---Variables de tema (se aplican al documento y a la vista previa)--- */
+.sol-form-root, .sol-preview {
+  --sol-bg: #ffffff;
+  --sol-line: #111111;
+  --sol-text: #111111;
+  --sol-muted: #555555;
+  --sol-head: #f2f2f2;
+  background: var(--sol-bg);
+  color: var(--sol-text);
+}
+.sol-preview.theme-beige {
+  --sol-bg: #f7efdf;
+  --sol-line: #9a7042;
+  --sol-text: #4a3520;
+  --sol-muted: #6b5136;
+  --sol-head: #ecdcbf;
+}
+
+/* ---Pagina A4--- */
+.sol-page {
+  width: 210mm; min-height: 297mm; margin: 0 auto 22px;
+  padding: 16mm 14mm 12mm; background: var(--sol-bg);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .13);
+  display: flex; flex-direction: column;
+}
+.sol-title {
+  text-align: center; font-size: 15px; font-weight: 700;
+  letter-spacing: .02em; margin: 0 0 24px;
+}
+.sol-section { font-size: 11px; font-weight: 700; margin: 16px 0 5px; }
+.sol-section:first-of-type { margin-top: 0; }
+
+/* ---Tablas--- */
+.sol-tbl { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.sol-cell, .sol-th {
+  border: 1px solid var(--sol-line); padding: 4px 6px;
+  height: 36px; vertical-align: top;
+}
+.sol-th { background: var(--sol-head); font-size: 10px; font-weight: 700; height: auto; text-align: left; }
+.sol-table-title {
+  border: 1px solid var(--sol-line); background: var(--sol-head);
+  text-align: center; font-size: 11px; font-weight: 700; padding: 4px;
+}
+.sol-fullcell {
+  border: 1px solid var(--sol-line); padding: 4px 6px; min-height: 36px;
+}
+
+/* ---Campos--- */
+.sol-label { display: block; font-size: 8px; line-height: 1.2; color: var(--sol-muted); }
+.sol-input {
+  display: block; width: 100%; border: 0; background: transparent;
+  color: var(--sol-text); font: inherit; font-size: 10px;
+  padding: 2px 0 0; outline: none;
+}
+.sol-input:focus { box-shadow: 0 1px 0 var(--sol-line); }
+textarea.sol-input { resize: vertical; min-height: 46px; }
+.sol-value { font-size: 10px; min-height: 14px; white-space: pre-wrap; word-break: break-word; }
+.sol-center { text-align: center; }
+.sol-note { font-size: 10px; margin: 10px 0; }
+
+/* ---Firma--- */
+.sol-signature { margin: 58px auto 0; width: 52%; text-align: center; }
+.sol-signature .sol-value { min-height: 18px; }
+.sol-signature-line { border-top: 1px solid var(--sol-line); margin-top: 2px; }
+.sol-signature-label { font-size: 8px; color: var(--sol-muted); padding-top: 3px; }
+
+.sol-footer {
+  margin-top: auto; text-align: center; font-size: 8px;
+  color: var(--sol-muted); padding-top: 12px;
+}
+
+@media (max-width: 1100px) {
+  .workspace { grid-template-columns: 1fr; }
+  .panel-left { max-height: none; overflow: visible; }
+}
+@media (max-width: 760px) {
+  .sol-page { width: 100%; min-height: 0; padding: 16px; }
+}
