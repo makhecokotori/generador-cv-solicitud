@@ -2,6 +2,15 @@
 
 Herramientas locales, privadas y sin costo para crear currículums profesionales y llenar una solicitud de empleo imprimible. Todo funciona en el navegador: sin servidor, sin internet y sin que los datos salgan de la PC.
 
+## Probarlo en línea
+
+**Demo pública:** https://makhecokotori.github.io/generador-cv-solicitud/
+
+- Constructor de CV: https://makhecokotori.github.io/generador-cv-solicitud/cv/
+- Solicitud de empleo: https://makhecokotori.github.io/generador-cv-solicitud/solicitud/
+
+Los datos se guardan solo en el navegador de cada persona (`localStorage`); no se envían a ningún servidor.
+
 ## Cómo usar
 
 1. Abre **`index.html`** con doble clic (también funciona con un servidor local).
