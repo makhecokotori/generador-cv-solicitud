@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Imagen de publicación</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1080px; height: 1080px; overflow: hidden; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #ffffff;
+      color: #111827;
+      position: relative;
+    }
+    .post { width: 1080px; height: 1080px; padding: 78px 76px; position: relative; overflow: hidden; }
+
+    /* Decoración sutil */
+    .deco { position: absolute; border-radius: 50%; background: #e8f0fe; z-index: 0; }
+    .deco.a { width: 360px; height: 360px; top: -150px; right: -120px; }
+    .deco.b { width: 190px; height: 190px; bottom: 250px; left: -110px; background: #dbeafe; }
+
+    .content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; }
+
+    /* Marca */
+    .brand { display: flex; align-items: center; gap: 22px; }
+    .mark {
+      width: 92px; height: 92px; border-radius: 24px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      display: grid; place-items: center;
+      color: #fff; font-size: 40px; font-weight: 800; letter-spacing: -.05em;
+      box-shadow: 0 10px 24px rgba(37,99,235,.28);
+    }
+    .brand-name { font-size: 27px; font-weight: 700; line-height: 1.15; }
+    .brand-name small { display: block; font-size: 18px; font-weight: 500; color: #6b7280; }
+
+    /* Titular */
+    .badge {
+      align-self: flex-start; margin-top: 62px;
+      background: #dbeafe; color: #1d4ed8;
+      font-size: 23px; font-weight: 800; letter-spacing: .06em;
+      padding: 10px 22px; border-radius: 999px;
+    }
+    h1 { font-size: 82px; line-height: 1.03; font-weight: 800; letter-spacing: -.045em; margin-top: 26px; }
+    h1 span { color: #2563eb; }
+    .sub { font-size: 32px; color: #6b7280; margin-top: 24px; font-weight: 500; }
+
+    /* Cifras concretas */
+    .features { display: flex; gap: 18px; margin-top: 54px; }
+    .feature {
+      flex: 1; background: #f8fafc; border: 2px solid #dbeafe;
+      border-radius: 22px; padding: 26px 24px;
+    }
+    .feature .num { font-size: 54px; font-weight: 800; color: #2563eb; line-height: 1; }
+    .feature .lbl { font-size: 23px; font-weight: 600; color: #374151; margin-top: 12px; }
+
+    /* Cierre */
+    .cta {
+      margin-top: auto; background: #1f2937; color: #fff;
+      border-radius: 24px; padding: 32px 38px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cta .txt { font-size: 34px; font-weight: 700; }
+    .cta .url { font-size: 19px; color: #bfdbfe; margin-top: 6px; }
+    .cta .arrow { font-size: 52px; color: #60a5fa; font-weight: 800; }
+  </style>
+</head>
+<body>
+  <div class="post">
+    <div class="deco a"></div>
+    <div class="deco b"></div>
+    <div class="content">
+      <div class="brand">
+        <div class="mark">CV</div>
+        <div class="brand-name">Herramientas<small>de empleo</small></div>
+      </div>
+
+      <div class="badge">GRATIS · SIN REGISTRO</div>
+      <h1>CV y solicitud de empleo <span>en PDF.</span></h1>
+      <div class="sub">Sin Word. Sin plantillas que se rompen al imprimir.</div>
+
+      <div class="features">
+        <div class="feature"><div class="num">20</div><div class="lbl">bloques para tu CV</div></div>
+        <div class="feature"><div class="num">3</div><div class="lbl">diseños profesionales</div></div>
+        <div class="feature"><div class="num">2</div><div class="lbl">páginas de solicitud</div></div>
+      </div>
+
+      <div class="cta">
+        <div>
+          <div class="txt">Link en el primer comentario</div>
+          <div class="url">makhecokotori.github.io/generador-cv-solicitud</div>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
