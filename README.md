@@ -45,7 +45,9 @@ Los datos se guardan automáticamente en `localStorage` del navegador. El botón
 ├── ESTRUCTURA-CV.md         Documentación de los bloques
 ├── PALETAS-COLORES.md       Documentación del sistema de color
 ├── PLAN.md                  Plan de trabajo y estado
-└── logo-muestras.html       Propuestas de logo
+├── logo-muestras.html       Propuestas de logo
+├── logo.svg                 Logo vectorial (monograma)
+└── logo-completo.svg        Logo vectorial con texto
 ```
 
 ## Desarrollo local
